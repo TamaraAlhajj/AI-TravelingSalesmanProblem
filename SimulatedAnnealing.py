@@ -7,9 +7,7 @@ from math import exp
 
 #CITIES = np.loadtxt(open("SmallData.csv", "rb"), dtype=int, delimiter=" ")
 CITIES = np.loadtxt(open("BigData.csv", "rb"), dtype=int, delimiter=" ")
-
 TOTAL_CITIES = np.shape(CITIES)[0]
-
 TEMPERATURE = 10000
 COOLING_RATE = 0.005
 
