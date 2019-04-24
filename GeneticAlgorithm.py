@@ -1,11 +1,8 @@
 import numpy as np
 
 
-# The minimal tour has length 19. 
-#CITIES = np.loadtxt(open("SmallData.csv", "rb"), dtype=int, delimiter=" ")
-
-# The minimal tour has length 291 km
-CITIES = np.loadtxt(open("BigData.csv", "rb"), dtype=int, delimiter=" ")
+CITIES = np.loadtxt(open("SmallData.csv", "rb"), dtype=int, delimiter=" ")
+#CITIES = np.loadtxt(open("BigData.csv", "rb"), dtype=int, delimiter=" ")
 
 TOTAL_CITIES = np.shape(CITIES)[0]
 
@@ -33,9 +30,9 @@ def totalDistance(individual):
         geneA, geneB = individual[i], individual[i+1]
         totalDistanceTraveled += CITIES[geneA, geneB]
     
-    # cost to close loop 
+    # close loop
     geneA, geneB = individual[-1], individual[0]
-    totalDistanceTraveled += CITIES[geneA, geneB]
+    totalDistanceTraveled += CITIES[geneA, geneB] 
 
     return totalDistanceTraveled
 
@@ -120,7 +117,8 @@ def GeneticAlgorithm(initialPopulationSize, terminationGeneration, mutationRate)
 
         # evaluate each individual and return the fittest
         survivors = selection(population)
-        # pick the fittest two for the most reproduction
+
+        # pick the fittest two for most reproduction
         try:
             if(np.random.randint(0, 100) < 80):
                 newGen = createChildren(survivors[0], survivors[1], 10)
@@ -131,13 +129,13 @@ def GeneticAlgorithm(initialPopulationSize, terminationGeneration, mutationRate)
                 np.concatenate((survivors, newGen))
 
             # mutate
-            if(np.random.random_sample() < mutationRate):
-                mutations = 0
-                while mutations < 7:
-                    individual = survivors[np.random.randint(0, len(survivors))]
-                    mutate(individual)
-                    mutations += 1
-                gen += 1
+            mutations = 0
+            while mutations < len(survivors) // mutationRate*10:
+                individual = survivors[np.random.randint(3, len(survivors))]
+                mutate(individual)
+                mutations += 1
+            gen += 1
+
         except IndexError:
             break
     
@@ -145,7 +143,7 @@ def GeneticAlgorithm(initialPopulationSize, terminationGeneration, mutationRate)
     return (bestFit, gen)
 
 
-solution, generations = GeneticAlgorithm(25, 100, 0.2)
+solution, generations = GeneticAlgorithm(30, 1000, 0.6)
 distance = totalDistance(solution)
 
 print("""
