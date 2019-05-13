@@ -1,0 +1,1 @@
+python GreedyAlgorithm.py && python GeneticAlgorithm.py && python SimulatedAnnealing.py
