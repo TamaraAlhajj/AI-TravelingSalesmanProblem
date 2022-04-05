@@ -1,4 +1,9 @@
 # Two approaches to Traveling Salesman Problem
+
+> The question of whether machines can think... is about as relevant as the question of whether submarines can swim
+> 
+> _Dijkstra_
+
 Comparison between a Non-AI and two AI techniques to solve the TSP. 
 The non-AI technique used is a greedy algorithm. 
 A Genetic algorithm and Simulated Annealing are the two intelligent techniques used to solve the NP-hard problem.
